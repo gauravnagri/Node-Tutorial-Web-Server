@@ -9,16 +9,16 @@ hbs.registerPartials(__dirname + "/views/partials");
 
 hbs.registerHelper("getCurrentYear",() => {
     return new Date().getFullYear();
-})
-
-app.use(express.static(__dirname + "/public"));
+});
 
 app.use((req,res,next) => {
    var now = new Date().toString();
    var log = `${now}:${req.method} : ${req.path}`;
    console.log(log);
-   //next();
+   next();
 });
+
+app.use(express.static(__dirname + "/public"));
 
 app.get("/",(req,res) => {
    res.render("home.hbs", {
